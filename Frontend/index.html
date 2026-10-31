@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f4">
+  <title>Visitor Hub — Gate pass, made simple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="gate.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Visitor Hub home">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span>visitor<span class="brand-light">hub</span></span>
+    </a>
+    <div class="topbar-right"><span class="secure-dot"></span><span>Secure visitor access</span><a href="#how-it-works">How it works</a></div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> A smoother way to welcome</div>
+        <h1>Your visit,<br><span>all set.</span></h1>
+        <p class="hero-description">Register in a moment. Verify your email. Get a ready-to-scan pass before you arrive.</p>
+        <div class="trust-row"><span class="trust-icon">✳</span><span>Thoughtful check-ins start here</span></div>
+      </div>
+      <div class="visual-card" aria-label="A digital visitor pass illustration">
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+        <div class="visual-note"><span class="note-icon">↗</span><span><strong>Ready when you are</strong><small>Your pass, always at hand</small></span></div>
+        <div class="pass-preview">
+          <div class="preview-top"><div class="preview-brand"><span class="mini-mark">V</span><span>VISITOR HUB</span></div><span class="preview-status"><i></i> VERIFIED</span></div>
+          <div class="preview-divider"></div>
+          <div class="preview-name">Your next<br>destination.</div>
+          <div class="preview-bottom"><span>VISITOR PASS<br><b>ONE VISIT. ONE PASS.</b></span><span class="preview-code"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+        </div>
+        <div class="visual-caption">A little less waiting.<br>A lot more welcome.</div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Visitor registration">
+      <div class="workspace-heading">
+        <div><div class="section-kicker">VISITOR CHECK-IN</div><h2>Let's get you in.</h2></div>
+        <span class="step-label"><span id="step-count">01</span> / 03</span>
+      </div>
+      <div class="progress-track"><span id="progress-bar"></span></div>
+
+      <div id="alert" class="alert" role="status" aria-live="polite" hidden></div>
+
+      <form id="visitor-form" class="form-grid">
+        <label class="field"><span>Full name</span><input name="name" autocomplete="name" placeholder="e.g. Jordan Lee" required minlength="2" maxlength="120"></label>
+        <label class="field"><span>Email address</span><input name="email" type="email" autocomplete="email" placeholder="you@company.com" required></label>
+        <label class="field field-full"><span>Address</span><input name="address" autocomplete="street-address" placeholder="Street, city, postal code" required minlength="4" maxlength="2000"></label>
+        <label class="field field-full"><span>Purpose of visit</span><textarea name="purpose" rows="3" placeholder="Tell us who you're here to see or what brings you in" required minlength="3" maxlength="2000"></textarea></label>
+        <div class="form-footer field-full"><p><span class="lock-icon">⌑</span> Your details are only used to prepare your visit.</p><button class="button button-primary" type="submit"><span>Continue to verification</span><span aria-hidden="true">→</span></button></div>
+      </form>
+
+      <form id="otp-form" class="otp-panel" hidden>
+        <button class="text-button" type="button" id="back-to-details">← Edit visitor details</button>
+        <div class="otp-icon">✉</div><h3>Check your inbox</h3>
+        <p>We sent a 6-digit verification code to <strong id="otp-email"></strong>.</p>
+        <label class="field otp-field"><span>Verification code</span><input name="otp" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" required></label>
+        <button class="button button-primary button-wide" type="submit"><span>Verify and create pass</span><span aria-hidden="true">→</span></button>
+      </form>
+
+      <section id="pass-panel" class="pass-panel" hidden>
+        <div class="pass-success"><span>✓</span> EMAIL VERIFIED</div>
+        <h3>Your pass is ready<span id="pass-name"></span></h3>
+        <p class="pass-intro">Show this QR code at the entry gate. Keep it handy for your visit.</p>
+        <div class="issued-pass">
+          <img id="pass-qr" alt="QR code for your visitor gate pass">
+          <div class="pass-details"><span class="detail-label">VISITOR</span><strong id="pass-visitor"></strong><span class="detail-label detail-purpose-label">PURPOSE</span><span id="pass-purpose"></span><span class="pass-expiry">Valid until <strong id="pass-expiry"></strong></span></div>
+        </div>
+        <button class="button button-secondary button-wide" id="new-visit" type="button">Register another visitor <span>↗</span></button>
+      </section>
+      <div class="privacy-note">By continuing, you agree to share your details with the host for access management.</div>
+    </section>
+
+    <section class="how-section" id="how-it-works">
+      <div class="how-title"><span class="section-kicker">SIMPLE BY DESIGN</span><h2>Three small steps.<br>One easy arrival.</h2></div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-number">01</span><span class="step-symbol">↗</span><h3>Share your details</h3><p>Let us know who you are and the reason for your visit.</p></article>
+        <article class="step-card"><span class="step-number">02</span><span class="step-symbol">✳</span><h3>Verify your email</h3><p>A quick one-time code makes sure your pass reaches you.</p></article>
+        <article class="step-card"><span class="step-number">03</span><span class="step-symbol">▦</span><h3>Scan and step in</h3><p>Your personal QR pass is ready to show at the gate.</p></article>
+      </div>
+    </section>
+
+    <section class="analytics" aria-label="Visitor activity">
+      <div><span class="section-kicker">VISITOR ACTIVITY</span><h2>Every welcome, accounted for.</h2></div>
+      <div class="metric-row"><div class="metric"><span>VISITORS · 30 DAYS</span><strong id="metric-total">—</strong></div><div class="metric"><span>EMAIL VERIFIED</span><strong id="metric-verified">—</strong></div><div class="metric"><span>PASSES ISSUED</span><strong id="metric-passes">—</strong></div></div>
+    </section>
+
+    <section class="gate-desk" aria-label="Gate pass validation">
+      <div><span class="section-kicker">FOR THE ENTRY TEAM</span><h2>Validate a visitor pass.</h2><p>Enter the token read from a visitor's QR code to approve entry. Each pass can be used once.</p></div>
+      <form id="gate-form"><label class="field"><span>Pass token</span><input name="token" autocomplete="off" placeholder="Paste scanned QR token" required minlength="32" maxlength="128"></label><button class="button button-primary" type="submit">Validate pass <span>→</span></button><div id="gate-result" class="gate-result" role="status" aria-live="polite" hidden></div></form>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">V</span><span>visitor<span class="brand-light">hub</span></span></a><span>Made for a more welcoming arrival.</span><a href="/docs" target="_blank" rel="noreferrer">API documentation ↗</a></footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
