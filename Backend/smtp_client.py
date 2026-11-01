@@ -300,7 +300,9 @@ def send_visitor_verification_email(to_email, name, otp):
             server.send_message(msg)
 
         print(f"Visitor verification email sent to {to_email}")
+        return True
 
     except Exception as e:
         print(f"Failed to send visitor verification email: {e}")
+        return False
 

@@ -3,6 +3,7 @@ import time
 import qrcode
 import base64
 from io import BytesIO
+from qrcode.image.svg import SvgPathImage
 
 def generate_qr_code(email, name, address, purpose):
     """Generate a QR code containing visitor information."""
@@ -24,11 +25,11 @@ def generate_qr_code(email, name, address, purpose):
     qr.add_data(visitor_info_json)
     qr.make(fit=True)
 
-    img = qr.make_image(fill_color="black", back_color="white")
+    img = qr.make_image(image_factory=SvgPathImage)
     
     # Convert image to base64 string
     buffered = BytesIO()
-    img.save(buffered, format="PNG")
+    img.save(buffered)
     img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
     
     return img_str

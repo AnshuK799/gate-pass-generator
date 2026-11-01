@@ -6,6 +6,8 @@ from smtp_client import send_visitor_verification_email
 from db_helpers import insert_into_visitors
 from otp_helpers import generate_otp, check_otp
 from generate_qr import generate_qr_code
+from generate_pass_pdf import generate_visitor_pass_pdf
+from config import OTP_DELIVERY, SMTP_CONFIGURED
 
 app = FastAPI()
 app.add_middleware(
@@ -31,10 +33,18 @@ async def generate_otp_endpoint(request: Request):
     if otp is None:
         return JSONResponse(status_code=500, content={"message": "Failed to generate OTP."})
 
-    # Send the OTP via email
-    send_visitor_verification_email(email, "Visitor", otp)
+    use_smtp = OTP_DELIVERY == "smtp" or (OTP_DELIVERY == "auto" and SMTP_CONFIGURED)
+    if use_smtp:
+        if not send_visitor_verification_email(email, "Visitor", otp):
+            return JSONResponse(status_code=502, content={"message": "Could not send the verification email. Please try again later."})
+    else:
+        # Local development fallback when SMTP has not been configured.
+        print(f"Visitor OTP for {email}: {otp}")
 
-    return JSONResponse(status_code=200, content={"message": "OTP generated and sent successfully."})
+    response = {"message": "OTP generated and sent successfully."}
+    if not use_smtp:
+        response["development_otp"] = otp
+    return JSONResponse(status_code=200, content=response)
 
 @app.post("/submit_visitor")
 async def submit_visitor(request: Request):
@@ -57,7 +67,8 @@ async def submit_visitor(request: Request):
         return JSONResponse(status_code=500, content={"message": "Failed to insert visitor data into the database."})   
     else:
         qr_code = generate_qr_code(email, name, address, purpose)
-        return JSONResponse(status_code=200, content={"message": "Visitor data inserted successfully.", "qr_code": qr_code})    
+        pass_pdf = generate_visitor_pass_pdf(name, address, email, purpose)
+        return JSONResponse(status_code=200, content={"message": "Visitor data inserted successfully.", "qr_code": qr_code, "visitor_pass_pdf": pass_pdf})
     
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000) 

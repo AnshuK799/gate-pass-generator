@@ -1,10 +1,10 @@
-import mysql.connector
+import pymysql
 from config import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT
 print(f"Connecting to MySQL database at {DB_HOST}:{DB_PORT} with user {DB_USER} and database {DB_NAME}")
 
 def get_db_connection():
     try:
-        connection = mysql.connector.connect(
+        connection = pymysql.connect(
             host=DB_HOST,
             user=DB_USER,
             password=DB_PASSWORD,
