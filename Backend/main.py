@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from smtp_client import send_visitor_verification_email
 from db_helpers import insert_into_visitors
 from otp_helpers import generate_otp, check_otp
+from generate_qr import generate_qr_code
 
 app = FastAPI()
 app.add_middleware(
@@ -55,7 +56,8 @@ async def submit_visitor(request: Request):
     if not response:
         return JSONResponse(status_code=500, content={"message": "Failed to insert visitor data into the database."})   
     else:
-        return JSONResponse(status_code=200, content={"message": "Visitor data inserted successfully."})    
+        qr_code = generate_qr_code(email, name, address, purpose)
+        return JSONResponse(status_code=200, content={"message": "Visitor data inserted successfully.", "qr_code": qr_code})    
     
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000) 
