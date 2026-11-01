@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263b78">
+  <title>Visitor Hub | DY Patil International University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="utility-bar">
+    <div class="utility-inner"><span>DY PATIL INTERNATIONAL UNIVERSITY</span><span>SECTOR 29, AKURDI, PUNE · 411044</span></div>
+  </div>
+  <header class="site-header">
+    <a class="brand" href="#home" data-page-link="home" aria-label="DY Patil International University Visitor Hub home"><img src="logo.webp" alt="DY Patil International University"></a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <button class="nav-link active" type="button" data-page="home">Home</button>
+      <button class="nav-link" type="button" data-page="about">About the application</button>
+      <button class="nav-link" type="button" data-page="developer">About the developer</button>
+      <button class="nav-cta" type="button" data-page="home" data-scroll-checkin>Visitor check-in <span aria-hidden="true">↗</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page active" id="page-home" data-page-section="home">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="university-tag"><span></span> A WARM WELCOME TO DYPIU</div>
+          <h1>Welcome to a<br>campus of <em>possibilities.</em></h1>
+          <p class="hero-description">Your visit to DY Patil International University starts here. Register in a few simple steps and get ready for a smooth arrival.</p>
+          <div class="hero-actions"><button class="hero-button" type="button" data-scroll-checkin>Plan your visit <span aria-hidden="true">→</span></button><a class="hero-link" href="https://www.dypiu.ac.in/" target="_blank" rel="noreferrer">Explore DYPIU <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-motto"><span class="motto-rule"></span><span>THINK <b>·</b> THRIVE <b>·</b> TRANSFORM</span></div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-sun"></div><div class="visual-orbit orbit-a"></div><div class="visual-orbit orbit-b"></div>
+          <div class="visual-monogram">DY<span>PIU</span></div>
+          <div class="visual-caption"><span class="caption-icon">✦</span><span>YOUR CAMPUS<br>VISIT BEGINS</span></div>
+          <div class="color-ribbon"><i></i><i></i><i></i></div>
+          <div class="visual-index">01 <span>—</span> AKURDI, PUNE</div>
+        </div>
+      </div>
+
+      <div class="home-content">
+        <div class="section-intro"><div><p class="section-kicker">VISITOR HUB</p><h2>Make your visit<br><em>memorable from the start.</em></h2></div><p>Whether you’re here to explore, connect, or celebrate, we’re glad to have you on campus. Complete your visitor check-in below.</p></div>
+        <section class="checkin-wrap" id="checkin" aria-label="Visitor check-in">
+          <div class="checkin-card">
+            <div class="card-heading"><div><p class="section-kicker">YOUR CAMPUS VISIT</p><h2 id="form-title">Let’s get you checked in</h2></div><span class="step-label" id="step-label">STEP 01 <i>/ 02</i></span></div>
+            <div class="progress-track"><span id="progress-fill"></span></div>
+            <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+            <form id="email-form" novalidate>
+              <p class="form-intro">Start with your email. We’ll send you a one-time verification code.</p>
+              <label for="email">Email address <span>*</span></label>
+              <div class="input-wrap"><span class="input-icon" aria-hidden="true">✉</span><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+              <button class="primary-button" type="submit"><span>Send verification code</span><span class="button-arrow" aria-hidden="true">→</span></button>
+              <p class="privacy-note"><span aria-hidden="true">▣</span> Your information is used only to arrange your campus visit.</p>
+            </form>
+            <form id="visitor-form" hidden novalidate>
+              <p class="form-intro">Enter the code sent to <strong id="email-display"></strong>, then tell us a little about your visit.</p>
+              <div class="field-grid">
+                <div class="field"><label for="name">Full name <span>*</span></label><input id="name" name="name" autocomplete="name" placeholder="Your full name" required></div>
+                <div class="field"><label for="otp">Email verification code <span>*</span></label><input id="otp" name="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code" required></div>
+                <div class="field"><label for="address">Address <span>*</span></label><input id="address" name="address" autocomplete="street-address" placeholder="City, state or full address" required></div>
+                <div class="field"><label for="purpose">Purpose of visit <span>*</span></label><select id="purpose" name="purpose" required><option value="" disabled selected>Select a purpose</option><option>Admissions enquiry</option><option>Campus tour</option><option>Meeting</option><option>Academic visit</option><option>Event</option><option>Other</option></select></div>
+              </div>
+              <div class="form-actions"><button class="text-button" type="button" id="back-button">← Change email</button><button class="primary-button submit-button" type="submit"><span>Complete check-in</span><span class="button-arrow" aria-hidden="true">→</span></button></div>
+              <p class="privacy-note"><span aria-hidden="true">▣</span> Your information is used only to arrange your campus visit.</p>
+            </form>
+            <section id="success-panel" class="success-panel" hidden aria-live="polite">
+              <div class="success-icon">✓</div><p class="section-kicker">CHECK-IN COMPLETE</p><h2>You’re expected at DYPIU.</h2><p>Your visitor details have been submitted. Keep your visitor pass ready when you arrive at the campus entrance.</p>
+              <div id="qr-container" class="qr-container" hidden><img id="qr-image" alt="Visitor QR pass"><span>YOUR VISITOR PASS</span></div>
+              <a id="download-pass" class="download-button" hidden download="DYPIU-Visitor-Pass.pdf">Download visitor pass (PDF) <span aria-hidden="true">↓</span></a>
+              <button type="button" class="secondary-button" id="new-visit">Register another visit</button>
+            </section>
+          </div>
+          <aside class="visit-aside"><span class="aside-icon" aria-hidden="true">⌖</span><div><b>We look forward to meeting you.</b><span>Sector 29, Akurdi, Pune, Maharashtra 411044</span></div><a href="https://maps.google.com/?q=DY+Patil+International+University+Akurdi+Pune" target="_blank" rel="noreferrer" aria-label="View university on map">↗</a></aside>
+        </section>
+      </div>
+    </section>
+
+    <section class="page info-page" id="page-about" data-page-section="about" hidden>
+      <div class="page-banner"><p class="section-kicker">VISITOR HUB · ABOUT</p><h1>A better welcome,<br><em>from the very first step.</em></h1><p>A simple digital check-in experience for guests visiting DY Patil International University.</p></div>
+      <div class="info-content">
+        <section class="about-lead"><div class="lead-index">01 <span>ABOUT THE APPLICATION</span></div><div><h2>Campus visits,<br>made <em>easy.</em></h2><p>Visitor Hub helps guests share their visit details before arriving on campus. Email verification keeps the process connected to the visitor, and a QR pass makes the final check-in easy to present at the entrance.</p><p>The application is designed around one clear goal: helping every guest feel expected and welcome at DYPIU.</p><button type="button" class="primary-button about-cta" data-page="home" data-scroll-checkin><span>Start a visitor check-in</span><span class="button-arrow">→</span></button></div></section>
+        <section class="feature-grid" aria-label="Application features"><article class="feature-card"><span class="feature-number">01</span><span class="feature-symbol">✉</span><h3>Email verification</h3><p>A one-time code confirms the visitor’s email before details are submitted.</p></article><article class="feature-card"><span class="feature-number">02</span><span class="feature-symbol">▤</span><h3>Simple registration</h3><p>Share your name, address, and reason for visiting in one short form.</p></article><article class="feature-card"><span class="feature-number">03</span><span class="feature-symbol">▦</span><h3>QR visitor pass</h3><p>Receive a QR pass after successful registration and keep it ready for arrival.</p></article></section>
+        <section class="process-section"><div><p class="section-kicker">HOW IT WORKS</p><h2>Three steps to<br><em>your campus visit.</em></h2></div><div class="process-list"><div><span>01</span><p><b>Verify your email</b><small>Request a one-time verification code.</small></p></div><div><span>02</span><p><b>Share your visit details</b><small>Complete your visitor information and purpose.</small></p></div><div><span>03</span><p><b>Bring your QR pass</b><small>Show your pass when you arrive on campus.</small></p></div></div></section>
+      </div>
+    </section>
+
+    <section class="page info-page" id="page-developer" data-page-section="developer" hidden>
+      <div class="page-banner developer-banner"><p class="section-kicker">THE PERSON BEHIND VISITOR HUB</p><h1>About the<br><em>developer.</em></h1><p>A DYPIU student building a smoother way to welcome campus visitors.</p></div>
+      <div class="developer-content">
+        <article class="developer-card"><div class="developer-portrait"><div class="portrait-rings"></div><span>AK</span><small>DYPIU · CSE</small></div><div class="developer-details"><p class="section-kicker">STUDENT DEVELOPER</p><h2>Anshu Kumar</h2><p class="developer-role">First-year student · Computer Science Engineering</p><div class="developer-rule"></div><dl><div><dt>University</dt><dd>DY Patil International University</dd></div><div><dt>Branch</dt><dd>Computer Science Engineering</dd></div><div><dt>PRN number</dt><dd>26013010137</dd></div><div><dt>Email</dt><dd><a href="mailto:anshumahato1234567@gmail.com">anshumahato1234567@gmail.com ↗</a></dd></div></dl></div><div class="developer-side-note"><span>BUILDING FOR</span><b>A warmer<br>campus welcome.</b></div></article>
+        <div class="developer-note"><span class="note-star">✳</span><p>Visitor Hub is a student project created to make the campus visit experience more organized, accessible, and welcoming.</p><span class="note-motto">THINK · THRIVE · TRANSFORM</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-main"><a class="footer-brand" href="#home" data-page-link="home"><img src="logo.webp" alt="DY Patil International University"></a><div class="footer-address"><b>DY Patil International University</b><span>Sector 29, Akurdi, Pune, Maharashtra 411044</span><a href="https://www.dypiu.ac.in/" target="_blank" rel="noreferrer">www.dypiu.ac.in ↗</a></div><div class="footer-motto">THINK<br><i>THRIVE</i><br>TRANSFORM</div></div><div class="footer-bottom"><span>© <span id="year"></span> DY Patil International University</span><span>VISITOR HUB</span></div></footer>
+</body>
+</html>

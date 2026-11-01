@@ -1,0 +1,6 @@
+fastapi==0.115.14
+uvicorn==0.34.0
+PyMySQL==1.1.1
+cryptography==44.0.1
+qrcode==8.2
+python-dotenv==1.0.1
