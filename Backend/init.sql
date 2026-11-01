@@ -13,17 +13,14 @@ CREATE TABLE visitors (
 
 CREATE TABLE email_otps (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    visitor_id BIGINT UNSIGNED NOT NULL,
-    otp_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    otp_code CHAR(6) NOT NULL,
     expires_at TIMESTAMP NOT NULL,
     verified_at TIMESTAMP NULL DEFAULT NULL,
     attempts SMALLINT UNSIGNED NOT NULL DEFAULT 0,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    KEY idx_email_otps_visitor_id (visitor_id),
-    CONSTRAINT fk_email_otps_visitor
-        FOREIGN KEY (visitor_id) REFERENCES visitors(id)
-        ON DELETE CASCADE
+    KEY idx_email_otps_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

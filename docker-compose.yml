@@ -18,46 +18,5 @@ services:
       timeout: 5s
       retries: 20
 
-  backend:
-    build:
-      context: ./Backend
-    restart: unless-stopped
-    environment:
-      APP_ENV: ${APP_ENV:-development}
-      APP_SECRET: ${APP_SECRET:?Set APP_SECRET in .env}
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_NAME: ${DB_NAME:-gate_pass}
-      DB_USER: ${DB_USER:-gate_pass_user}
-      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
-      OTP_DELIVERY: ${OTP_DELIVERY:-console}
-      OTP_TTL_MINUTES: ${OTP_TTL_MINUTES:-10}
-      OTP_MAX_ATTEMPTS: ${OTP_MAX_ATTEMPTS:-5}
-      PASS_TTL_HOURS: ${PASS_TTL_HOURS:-8}
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:8080}
-      SMTP_HOST: ${SMTP_HOST:-}
-      SMTP_PORT: ${SMTP_PORT:-587}
-      SMTP_USERNAME: ${SMTP_USERNAME:-}
-      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
-      SMTP_FROM: ${SMTP_FROM:-}
-    depends_on:
-      mysql:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-
-  frontend:
-    build:
-      context: ./Frontend
-    restart: unless-stopped
-    ports:
-      - "${FRONTEND_PORT:-8080}:80"
-    depends_on:
-      backend:
-        condition: service_healthy
-
 volumes:
   mysql_data:
